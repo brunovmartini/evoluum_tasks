@@ -1,15 +1,13 @@
 from typing import List
 
 from fastapi import APIRouter, status, Depends, Response
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from users.models import UserModel
-from tasks.schemas import TaskResponse, TaskRequest
-from core.database import get_session
 from core.auth import get_current_user
+from core.database import get_session
 from tasks import queries
-
+from tasks.schemas import TaskResponse, TaskRequest
+from users.models import UserModel
 
 tasks_router = APIRouter(prefix='/tasks', tags=['tasks'])
 
@@ -22,12 +20,20 @@ async def get_tasks(
     return await queries.get_tasks(logged_user.id, db)
 
 
-@tasks_router.get('/{task_id}', response_model=TaskResponse, status_code=status.HTTP_200_OK)
+@tasks_router.get(
+    '/{task_id}',
+    response_model=TaskResponse,
+    status_code=status.HTTP_200_OK
+)
 async def get_task(task_id: int, db: AsyncSession = Depends(get_session)):
     return await queries.get_task(task_id, db)
 
 
-@tasks_router.post('/', status_code=status.HTTP_201_CREATED, response_model=TaskResponse)
+@tasks_router.post(
+    '/',
+    status_code=status.HTTP_201_CREATED,
+    response_model=TaskResponse
+)
 async def create_task(
     task: TaskRequest,
     logged_user: UserModel = Depends(get_current_user),
@@ -36,7 +42,11 @@ async def create_task(
     return await queries.create_task(task, logged_user.id, db)
 
 
-@tasks_router.put('/{task_id}', response_model=TaskResponse, status_code=status.HTTP_200_OK)
+@tasks_router.put(
+    '/{task_id}',
+    response_model=TaskResponse,
+    status_code=status.HTTP_200_OK
+)
 async def update_task(
     task_id: int,
     task: TaskRequest,

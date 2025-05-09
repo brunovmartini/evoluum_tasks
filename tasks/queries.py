@@ -1,12 +1,11 @@
 from fastapi import Depends
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from tasks.models import TaskModel
-from tasks.schemas import TaskRequest
 from core.database import get_session
 from tasks.exceptions import TaskNotFound, UnauthorizedUser
+from tasks.models import TaskModel
+from tasks.schemas import TaskRequest
 
 
 async def get_tasks(

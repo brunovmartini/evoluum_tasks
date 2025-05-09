@@ -1,15 +1,14 @@
 from fastapi import Depends
 from pydantic import EmailStr
-
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.exc import IntegrityError
 
-from users.models import UserModel
-from users.schemas import UserRequest
 from core.database import get_session
 from core.security import generate_hash_password
 from users.exceptions import InvalidEmail
+from users.models import UserModel
+from users.schemas import UserRequest
 
 
 async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
@@ -20,7 +19,10 @@ async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
     return user
 
 
-async def create_user(user: UserRequest, session: AsyncSession = Depends(get_session)):
+async def create_user(
+    user: UserRequest,
+    session: AsyncSession = Depends(get_session)
+):
     new_user = UserModel(
         email=user.email,
         password=generate_hash_password(user.password),

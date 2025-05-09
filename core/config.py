@@ -1,6 +1,6 @@
+from decouple import config
 from pydantic import BaseSettings
 from sqlalchemy.ext.declarative import declarative_base
-from decouple import config
 
 
 class Setttings(BaseSettings):

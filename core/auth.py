@@ -1,27 +1,20 @@
-from pytz import timezone
-
 from datetime import datetime, timedelta
-
-from fastapi.security import OAuth2PasswordBearer
-
-from core.security import verify_password
-
-from pydantic import EmailStr
-
 from typing import Optional
 
 from fastapi import Depends
+from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
-
-from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
+from pydantic import EmailStr
+from pytz import timezone
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import Session, get_session
 from core.config import settings
+from core.database import Session, get_session
+from core.security import verify_password
+from users.exceptions import AuthenticationUnauthorized
 from users.models import UserModel
 from users.queries import get_user_by_email, get_user
-from users.exceptions import AuthenticationUnauthorized
-
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl=settings.TOKEN_URL)
 
@@ -30,7 +23,11 @@ class TokenData(BaseModel):
     username: Optional[str] = None
 
 
-async def authenticate_user(email: EmailStr, password: str, db: AsyncSession) -> Optional[UserModel]:
+async def authenticate_user(
+    email: EmailStr,
+    password: str,
+    db: AsyncSession
+) -> Optional[UserModel]:
     user = await get_user_by_email(email, db)
 
     if not user:
@@ -53,7 +50,11 @@ def _create_token(token_type: str, life_time: timedelta, sub: str) -> str:
         'sub': str(sub)
     }
 
-    return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.ALGORITHM)
+    return jwt.encode(
+        payload,
+        settings.JWT_SECRET,
+        algorithm=settings.ALGORITHM
+    )
 
 
 def create_access_token(sub: str) -> str:
