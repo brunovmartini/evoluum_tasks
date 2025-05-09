@@ -27,5 +27,5 @@ class TaskNotFound(HTTPException):
 
 class UnauthorizedUser(HTTPException):
     def __init__(self):
-        self.status_code = status.HTTP_401_UNAUTHORIZED,
+        self.status_code = status.HTTP_401_UNAUTHORIZED
         self.detail = 'Current user is not the task creator'
