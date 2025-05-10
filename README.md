@@ -52,7 +52,7 @@ python create_tables.py
 ---
 
 
-### Endpoints integrados com FlutterFlow 🔄
+### Endpoints 🔄
 
 **POST /users/signup**
 
@@ -66,7 +66,7 @@ Request Body
 }
 ```
 
-Resposta com Sucesso
+Successful Response
 
 ```jsx
 {
@@ -79,7 +79,6 @@ Resposta com Sucesso
 
 ---
 
-
 **POST /users/login**
 
 Request body em Form-data
@@ -88,7 +87,7 @@ Request body em Form-data
 "password": "string"
 ```
 
-Resposta com Sucesso
+Successful Response
 
 ```jsx
 {
@@ -98,5 +97,157 @@ Resposta com Sucesso
   "last_name": "string",
   "access_token": "string",
   "token_type": "string"
+}
+```
+---
+
+**GET /users/{user_id}**
+
+Successful Response
+
+```jsx
+{
+  "id": 0,
+  "email": "user@example.com",
+  "name": "string",
+  "last_name": "string"
+}
+```
+
+---
+
+**GET /users/logged**
+
+Authorization
+```jsx
+{
+    'Authorization': 'Bearer {token}'
+}
+```
+
+Successful Response
+
+```jsx
+{
+  "id": 0,
+  "email": "user@example.com",
+  "name": "string",
+  "last_name": "string",
+  "access_token": "string",
+  "token_type": "string"
+}
+```
+
+---
+
+**GET /tasks/{task_id}**
+
+Successful Response
+
+```jsx
+{
+  "id": 0,
+  "title": "string",
+  "description": "string",
+  "user_id": 0
+}
+```
+
+---
+
+**GET /tasks**
+
+Authorization
+```jsx
+{
+    'Authorization': 'Bearer {token}'
+}
+```
+
+Successful Response
+
+```jsx
+[
+  {
+    "id": 0,
+    "title": "string",
+    "description": "string",
+    "user_id": 0
+  }
+]
+```
+
+---
+
+**POST /tasks**
+
+Authorization
+```jsx
+{
+    'Authorization': 'Bearer {token}'
+}
+```
+
+Request Body
+```jsx
+{
+  "title": "string",
+  "description": "string"
+}
+```
+
+Successful Response
+
+```jsx
+[
+  {
+    "id": 0,
+    "title": "string",
+    "description": "string",
+    "user_id": 0
+  }
+]
+```
+
+---
+
+**PUT /tasks/{task_id}**
+
+Authorization
+```jsx
+{
+    'Authorization': 'Bearer {token}'
+}
+```
+
+Request Body
+```jsx
+{
+  "title": "string",
+  "description": "string"
+}
+```
+
+Successful Response
+
+```jsx
+[
+  {
+    "id": 0,
+    "title": "string",
+    "description": "string",
+    "user_id": 0
+  }
+]
+```
+
+---
+
+**DELETE /tasks/{task_id}**
+
+Authorization
+```jsx
+{
+    'Authorization': 'Bearer {token}'
 }
 ```
