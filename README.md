@@ -51,6 +51,18 @@ python create_tables.py
 
 ---
 
+### Publicação 🗒️
+
+A versão de produção publicada da aplicação de backend pode ser acessada pelo endereço:
+
+- https://evoluumtasks.ignorelist.com/
+
+Consequentemente a documentação dos endpoints pode ser visualizada em:
+
+- https://evoluumtasks.ignorelist.com/docs
+
+---
+
 
 ### Endpoints 🔄
 
