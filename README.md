@@ -56,6 +56,8 @@ python create_tables.py
 
 **POST /users/signup**
 
+Realiza a criação do usuário.
+
 Request Body
 ```jsx
 {
@@ -81,6 +83,9 @@ Successful Response
 
 **POST /users/login**
 
+Realiza o login do usuário.
+
+
 Request body em Form-data
 ```jsx
 "username": "user@example.com"
@@ -103,6 +108,8 @@ Successful Response
 
 **GET /users/{user_id}**
 
+Retorna os dados de um usuário.
+
 Successful Response
 
 ```jsx
@@ -117,6 +124,8 @@ Successful Response
 ---
 
 **GET /users/logged**
+
+Retorna os dados do usuário logado.
 
 Authorization
 ```jsx
@@ -142,6 +151,8 @@ Successful Response
 
 **GET /tasks/{task_id}**
 
+Retorna os dados de uma tarefa específica.
+
 Successful Response
 
 ```jsx
@@ -156,6 +167,8 @@ Successful Response
 ---
 
 **GET /tasks**
+
+Retorna os dados das tarefas do usuário logado.
 
 Authorization
 ```jsx
@@ -180,6 +193,8 @@ Successful Response
 ---
 
 **POST /tasks**
+
+Cria uma tarefa e vincula ao usuário logado.
 
 Authorization
 ```jsx
@@ -213,6 +228,8 @@ Successful Response
 
 **PUT /tasks/{task_id}**
 
+Edita uma tarefa do usuário logado.
+
 Authorization
 ```jsx
 {
@@ -244,6 +261,8 @@ Successful Response
 ---
 
 **DELETE /tasks/{task_id}**
+
+Deleta uma tarefa do usuário logado.
 
 Authorization
 ```jsx
